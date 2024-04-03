@@ -31,7 +31,7 @@ def draw_text2(surface, text, size, x, y):
 	surface.blit(text_surface, text_rect)
 
 def draw_hp_bar(surface, x, y, percentage):
-	BAR_LENGHT = 100
+	BAR_LENGHT = 50
 	BAR_HEIGHT = 10
 	fill = (percentage / 100) * BAR_LENGHT
 	border = pygame.Rect(x, y, BAR_LENGHT, BAR_HEIGHT)
@@ -40,7 +40,7 @@ def draw_hp_bar(surface, x, y, percentage):
 	pygame.draw.rect(surface, WHITE, border, 2)
 
 def draw_mana_bar(surface, x, y, percentage):
-	BAR_LENGHT = 100
+	BAR_LENGHT = 50
 	BAR_HEIGHT = 10
 	fill = (percentage / 100) * BAR_LENGHT
 	border = pygame.Rect(x, y, BAR_LENGHT, BAR_HEIGHT)
@@ -710,6 +710,8 @@ while running:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False
+			pygame.quit()
+			sys.exit()
 
 	if player1.hp == 0:
 		player1.hp = 100
@@ -830,15 +832,19 @@ while running:
 
 	draw_hp_bar(screen, 120, 5, player1.hp)
 	draw_text2(screen, str(int(player1.hp)) + "/100", 10, 170, 6)
+	draw_hp_bar(screen, player1.rect.x, player1.rect.y - 10, player1.hp)
 
 	draw_hp_bar(screen, 415, 5, player2.hp)
 	draw_text2(screen, str(int(player2.hp))+ "/100", 10, 470, 6)
+	draw_hp_bar(screen, player2.rect.x, player2.rect.y - 10, player2.hp)
 
 	draw_hp_bar(screen, 715, 5, player3.hp)
 	draw_text2(screen, str(int(player3.hp))+ "/100", 10, 770, 6)
+	draw_hp_bar(screen, player3.rect.x, player3.rect.y - 10, player3.hp)
 
 	draw_hp_bar(screen, 1015, 5, player4.hp)
 	draw_text2(screen, str(int(player4.hp))+ "/100", 10, 1070, 6)
+	draw_hp_bar(screen, player4.rect.x, player4.rect.y - 10, player4.hp)
 	
 	#reloj
 	draw_text1(screen, str((((pygame.time.get_ticks() - start_time)//60000)+(60))%(60))+":" + str((((pygame.time.get_ticks() - start_time)//1000)+(60))%(60)), 30, 570, 50)
